@@ -51,4 +51,9 @@ def delete_entry(id):
         f.write(json.dumps(entries))
 
 def edit_entry(id, new_text):
-    pass
+    for e in entries:
+        if e['id'] == str(id):
+            e['text'] = new_text
+            e['timestamp'] = datetime.now().strftime("%b %d, %Y %I:%M %p")
+    with open(GUESTBOOK_ENTRIES_FILE, 'w') as f:
+        f.write(json.dumps(entries))
