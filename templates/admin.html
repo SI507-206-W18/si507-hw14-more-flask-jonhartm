@@ -7,11 +7,12 @@
 
 {% for e in entries %}
     <div class="entry">
-        <p class="entrytext"> {{e['text']}} </p>
-        <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
         <form method="post" action="/delete">
+          <textarea name="entrytext" cols=40 rows=5>{{e['text']}}</textarea>
+          <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
           <input type="hidden" name="id" value="{{e['id']}}"></input>
           <input type="submit" value="X"></input>
+          <input type="submit" value="Edit" formaction="/edit"></input>
         </form>
     </div>
 {% endfor %}

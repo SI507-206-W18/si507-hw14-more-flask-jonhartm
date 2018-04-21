@@ -37,7 +37,18 @@ def add_entry(name, text):
         print("ERROR! Could not write entries to file.")
 
 def delete_entry(id):
-    global entries
+    global entries, GUESTBOOK_ENTRIES_FILE, next_id
     for entry in entries:
         if entry['id'] == id:
             entries.remove(entry)
+    # renumber the entries and reset the next_id
+    new_id = 0
+    for entry in entries:
+        entry['id'] = new_id
+        new_id += 1
+    next_id = new_id
+    with open(GUESTBOOK_ENTRIES_FILE, 'w') as f:
+        f.write(json.dumps(entries))
+
+def edit_entry(id, new_text):
+    pass
